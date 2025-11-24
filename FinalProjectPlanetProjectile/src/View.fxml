@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController">
+   <children>
+      <AnchorPane fx:id="WelcomeMenuPane" prefHeight="405.0" prefWidth="595.0" visible="false">
+         <children>
+            <ImageView fx:id="BackgroundMenu" fitHeight="407.0" fitWidth="611.0" layoutY="11.0" pickOnBounds="true">
+               <image>
+                  <Image url="@BackgroundMenu.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="welcomeLabel" layoutX="65.0" layoutY="22.0" text="Welcome to the Planetarium Projectile Simulator" textFill="WHITE">
+               <font>
+                  <Font name="Bookman Old Style Bold" size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="clickLabel" layoutX="247.0" layoutY="58.0" text="Click on A planet " textFill="#bfacac">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="venusMenu" fitHeight="133.0" fitWidth="198.0" layoutX="301.0" layoutY="184.0" onMouseClicked="#venusClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@venus.png" />
+               </image></ImageView>
+            <ImageView fx:id="mercuryMenu" fitHeight="74.0" fitWidth="117.0" layoutX="477.0" layoutY="112.0" onMouseClicked="#mercuryClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@mercury.png" />
+               </image></ImageView>
+            <ImageView fx:id="earthMenu" fitHeight="246.0" fitWidth="502.0" layoutX="247.0" layoutY="26.0" onMouseClicked="#earthClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@earth.png" />
+               </image></ImageView>
+            <ImageView fx:id="marsMenu" fitHeight="133.0" fitWidth="201.0" layoutX="248.0" layoutY="149.0" onMouseClicked="#marsClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@mars.png" />
+               </image></ImageView>
+            <ImageView fx:id="jupiterMenu" fitHeight="198.0" fitWidth="269.0" layoutX="113.0" layoutY="240.0" onMouseClicked="#jupiterClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@jupiter.png" />
+               </image></ImageView>
+            <ImageView fx:id="saturnMenu" fitHeight="226.0" fitWidth="364.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#saturnClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@saturn.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="uranusMenu" disable="true" fitHeight="206.0" fitWidth="311.0" layoutX="-76.0" layoutY="203.0" onMouseClicked="#uranusClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@uranus.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="neptuneMenu" fitHeight="340.0" fitWidth="296.0" layoutX="-76.0" layoutY="-68.0" onMouseClicked="#neptuneClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@neptune.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="578.0">
+         <children>
+            <ImageView fx:id="BackgroudSecond" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
+               <image>
+                  <Image url="@BackgroundSecond.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="6.0" layoutY="15.0" prefHeight="38.0" prefWidth="200.0" text="You Are On :" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <Label fx:id="planetName" layoutX="180.0" layoutY="14.0" textFill="#a9a7d9">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="planetGround" fitHeight="133.0" fitWidth="600.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="206.0" layoutY="74.0" text="Choose an Object " textFill="#f4efef">
+               <font>
+                  <Font name="Eras Demi ITC" size="19.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="start" fitHeight="110.0" fitWidth="140.0" layoutX="22.0" layoutY="118.0" onMouseClicked="#startClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@star.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="flower" fitHeight="117.0" fitWidth="158.0" layoutX="162.0" layoutY="125.0" onMouseClicked="#flowerClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@flower.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="soccer" fitHeight="110.0" fitWidth="134.0" layoutX="311.0" layoutY="133.0" onMouseClicked="#soccerClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@soccer.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="apple" fitHeight="110.0" fitWidth="124.0" layoutX="469.0" layoutY="125.0" onMouseClicked="#appleClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@apple.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
