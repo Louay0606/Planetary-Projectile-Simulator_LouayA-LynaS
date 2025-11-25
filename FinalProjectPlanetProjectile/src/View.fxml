@@ -9,7 +9,7 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController">
    <children>
-      <AnchorPane fx:id="WelcomeMenuPane" prefHeight="405.0" prefWidth="595.0" visible="false">
+      <AnchorPane fx:id="WelcomeMenuPane" prefHeight="405.0" prefWidth="595.0">
          <children>
             <ImageView fx:id="BackgroundMenu" fitHeight="407.0" fitWidth="611.0" layoutY="11.0" pickOnBounds="true">
                <image>
