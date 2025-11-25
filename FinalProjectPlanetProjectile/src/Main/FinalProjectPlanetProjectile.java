@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package finalprojectplanetprojectile;
+package Main;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -22,7 +24,11 @@ public class FinalProjectPlanetProjectile extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/View.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setTitle("Planet Project");
+        stage.setScene(scene);
+        stage.show();
     }
     
 }

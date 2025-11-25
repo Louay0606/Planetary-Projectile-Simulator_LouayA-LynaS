@@ -1,3 +1,5 @@
+package controller;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
@@ -18,6 +20,9 @@ import javafx.scene.layout.AnchorPane;
  * @author louay
  */
 public class ViewController implements Initializable {
+
+    
+
 
     @FXML
     private AnchorPane WelcomeMenuPane;
@@ -66,6 +71,7 @@ public class ViewController implements Initializable {
         // TODO
     }    
 
+    
     @FXML
     private void venusClicked(MouseEvent event) {
     }
