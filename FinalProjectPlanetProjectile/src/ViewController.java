@@ -43,6 +43,20 @@ public class ViewController implements Initializable {
     private ImageView uranusMenu;
     @FXML
     private ImageView neptuneMenu;
+    @FXML
+    private ImageView BackgroudSecond;
+    @FXML
+    private Label planetName;
+    @FXML
+    private ImageView planetGround;
+    @FXML
+    private ImageView start;
+    @FXML
+    private ImageView flower;
+    @FXML
+    private ImageView soccer;
+    @FXML
+    private ImageView apple;
 
     /**
      * Initializes the controller class.
@@ -82,6 +96,22 @@ public class ViewController implements Initializable {
 
     @FXML
     private void neptuneClicked(MouseEvent event) {
+    }
+  
+    @FXML
+    private void startClicked(MouseEvent event) {
+    }
+
+    @FXML
+    private void flowerClicked(MouseEvent event) {
+    }
+
+    @FXML
+    private void soccerClicked(MouseEvent event) {
+    }
+
+    @FXML
+    private void appleClicked(MouseEvent event) {
     }
     
 }
