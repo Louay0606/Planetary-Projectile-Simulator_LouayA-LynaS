@@ -24,7 +24,7 @@
                   <Image url="@BackgroundSecond.png" />
                </image>
             </ImageView>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#727e89" height="340.0" layoutX="30.0" layoutY="37.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" width="530.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#727e89" height="219.0" layoutX="30.0" layoutY="96.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" width="530.0" />
             <Label layoutX="232.0" layoutY="48.0" text="RESULTS!" textFill="#d7c6c6">
                <font>
                   <Font name="System Bold" size="25.0" />
@@ -52,9 +52,38 @@
             </Label>
             <Label layoutX="55.0" layoutY="264.0" text="Your Distance was of : " textFill="#e4dada">
                <font>
-                  <Font name="System Bold" size="22.0" />
+                  <Font size="22.0" />
                </font>
             </Label>
+            <Label fx:id="distanceResultLabel" layoutX="304.0" layoutY="265.0" prefHeight="30.0" prefWidth="112.0" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="resartSimuButton" layoutX="43.0" layoutY="334.0" mnemonicParsing="false" onAction="#restartButton" prefHeight="38.0" prefWidth="236.0" text="Resart The Simulation">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.34">
+                     <color>
+                        <Color red="0.08307342231273651" green="0.028265107423067093" blue="0.2631579041481018" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="exitSimuButton" layoutX="344.0" layoutY="334.0" mnemonicParsing="false" onAction="#exitSimuButton" prefHeight="38.0" prefWidth="218.0" text="Exit The Simulation">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.49">
+                     <color>
+                        <Color red="0.027368420735001564" green="0.03164912387728691" blue="0.28421053290367126" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="WelcomeMenuPane" prefHeight="405.0" prefWidth="595.0" visible="false">
