@@ -1,19 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
-
-
-import javafx.scene.image.Image;
-
 
 public class Planet {
 
-    private String name;
-    private double gravity;   // m/s^2
-    private String groundImagePath;
-    private int id;           // 1 = Mercury, 2 = Venus, etc.
+    private final int id;
+    private final String name;
+    private final double gravity;          // m/s^2
+    private final String groundImagePath;  // path to the background image
 
     public Planet(int id, String name, double gravity, String groundImagePath) {
         this.id = id;
@@ -34,7 +26,7 @@ public class Planet {
         return gravity;
     }
 
-    public Image getGroundImage() {
-        return new Image(groundImagePath);
+    public String getGroundImagePath() {
+        return groundImagePath;
     }
 }
