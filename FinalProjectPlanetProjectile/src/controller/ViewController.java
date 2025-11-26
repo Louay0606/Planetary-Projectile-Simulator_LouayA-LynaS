@@ -38,15 +38,12 @@ public class ViewController {
         };
     }
 
-    // STEP 2: now this method actually uses the Planet object
     private void openPlanetScreen(int id) {
-        Planet p = planets[id - 1];  // id goes 1–8, array index 0–7
+        Planet p = planets[id - 1];
 
-        // switch screens
         WelcomeMenuPane.setVisible(false);
         BackgroundSecond.setVisible(true);
 
-        // update UI for the selected planet
         planetName.setText(p.getName());
 
         Image groundImage = new Image(
@@ -55,5 +52,45 @@ public class ViewController {
         planetGround.setImage(groundImage);
     }
 
-    // click handlers added next commit
+    // STEP 3 — one tiny method per planet
+
+    @FXML
+    void mercuryClicked(MouseEvent event) {
+        openPlanetScreen(1);
+    }
+
+    @FXML
+    void venusClicked(MouseEvent event) {
+        openPlanetScreen(2);
+    }
+
+    @FXML
+    void earthClicked(MouseEvent event) {
+        openPlanetScreen(3);
+    }
+
+    @FXML
+    void marsClicked(MouseEvent event) {
+        openPlanetScreen(4);
+    }
+
+    @FXML
+    void jupiterClicked(MouseEvent event) {
+        openPlanetScreen(5);
+    }
+
+    @FXML
+    void saturnClicked(MouseEvent event) {
+        openPlanetScreen(6);
+    }
+
+    @FXML
+    void uranusClicked(MouseEvent event) {
+        openPlanetScreen(7);
+    }
+
+    @FXML
+    void neptuneClicked(MouseEvent event) {
+        openPlanetScreen(8);
+    }
 }
