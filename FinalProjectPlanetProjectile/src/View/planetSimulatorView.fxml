@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
@@ -14,9 +15,49 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ViewController">
    <children>
-      <AnchorPane fx:id="WelcomeMenuPane" prefHeight="405.0" prefWidth="595.0">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="403.0" fitWidth="600.0" pickOnBounds="true">
+               <image>
+                  <Image url="@BackgroundSecond.png" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#727e89" height="340.0" layoutX="30.0" layoutY="37.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" width="530.0" />
+            <Label layoutX="232.0" layoutY="48.0" text="RESULTS!" textFill="#d7c6c6">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="55.0" layoutY="112.0" text="Your flight time was of  :" textFill="#dfd5d5">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="timeFlightLabel" layoutX="344.0" layoutY="113.0" prefHeight="18.0" prefWidth="158.0" textFill="#dfd5d5" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="55.0" layoutY="184.0" text="Your Maximum Height was of : " textFill="#eadddd">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="maxHeightLabel" layoutX="375.0" layoutY="185.0" prefHeight="30.0" prefWidth="106.0" textFill="#fffefe">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="55.0" layoutY="264.0" text="Your Distance was of : " textFill="#e4dada">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="WelcomeMenuPane" prefHeight="405.0" prefWidth="595.0" visible="false">
          <children>
             <ImageView fx:id="BackgroundMenu" fitHeight="407.0" fitWidth="611.0" layoutY="11.0" pickOnBounds="true">
                <image>
@@ -37,15 +78,15 @@
                <image>
                   <Image url="@venus.png" />
                </image></ImageView>
-            <ImageView fx:id="mercuryMenu" fitHeight="74.0" fitWidth="117.0" layoutX="477.0" layoutY="112.0" onMouseClicked="#mercuryClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mercuryMenu" fitHeight="74.0" fitWidth="117.0" layoutX="499.0" layoutY="110.0" onMouseClicked="#mercuryClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@mercury.png" />
                </image></ImageView>
-            <ImageView fx:id="earthMenu" fitHeight="246.0" fitWidth="502.0" layoutX="247.0" layoutY="26.0" onMouseClicked="#earthClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="earthMenu" fitHeight="216.0" fitWidth="296.0" layoutX="247.0" layoutY="26.0" onMouseClicked="#earthClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@earth.png" />
                </image></ImageView>
-            <ImageView fx:id="marsMenu" fitHeight="133.0" fitWidth="201.0" layoutX="248.0" layoutY="149.0" onMouseClicked="#marsClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="marsMenu" fitHeight="133.0" fitWidth="201.0" layoutX="210.0" layoutY="267.0" onMouseClicked="#marsClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@mars.png" />
                </image></ImageView>
@@ -70,7 +111,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="578.0">
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="578.0" visible="false">
          <children>
             <ImageView fx:id="BackgroudSecond" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
                <image>
@@ -87,7 +128,7 @@
                   <Font name="System Bold" size="27.0" />
                </font>
             </Label>
-            <ImageView fx:id="planetGround" fitHeight="133.0" fitWidth="600.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="planetGround" fitHeight="133.0" fitWidth="600.0" layoutY="260.0" pickOnBounds="true" />
             <Label layoutX="206.0" layoutY="74.0" text="Choose an Object " textFill="#f4efef">
                <font>
                   <Font name="Eras Demi ITC" size="19.0" />
@@ -172,7 +213,33 @@
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></Label>
-            <ComboBox fx:id="VelecotyComboBox" layoutX="49.0" layoutY="94.0" prefWidth="150.0" promptText="Velocities" />
+            <ComboBox fx:id="VelecotyComboBox" layoutX="51.0" layoutY="94.0" prefHeight="32.0" prefWidth="182.0" promptText="Velocities" />
+            <Label layoutX="50.0" layoutY="213.0" text="Select Your Throw Angle" textFill="#eadddd">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Slider fx:id="sliderangle" layoutX="50.0" layoutY="237.0" max="90.0" prefHeight="93.0" prefWidth="296.0" showTickLabels="true" showTickMarks="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="pane4" prefHeight="392.0" prefWidth="624.0" visible="false">
+         <children>
+            <ImageView fitHeight="407.0" fitWidth="611.0" layoutY="-2.0" pickOnBounds="true">
+               <image>
+                  <Image url="@BackgroundSecond.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planetGroundSimulation" fitHeight="169.0" fitWidth="611.0" layoutX="1.0" layoutY="236.0" pickOnBounds="true">
+               <image>
+                  <Image url="@planet1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="thrownObjectImagiew" fitHeight="39.0" fitWidth="42.0" layoutX="1.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="201.0" layoutY="25.0" text="SIMULATING...." textFill="#dccdcd">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>
