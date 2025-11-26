@@ -90,6 +90,12 @@ public class ViewController implements Initializable {
     private Label maxHeightLabel;
     @FXML
     private ImageView thrownObjectImagiew;
+    @FXML
+    private Label distanceResultLabel;
+    @FXML
+    private Button resartSimuButton;
+    @FXML
+    private Button exitSimuButton;
 
     /**
      * Initializes the controller class.
@@ -185,6 +191,14 @@ public class ViewController implements Initializable {
 
     @FXML
     private void nextS3(ActionEvent event) {
+    }
+
+    @FXML
+    private void restartButton(ActionEvent event) {
+    }
+
+    @FXML
+    private void exitSimuButton(ActionEvent event) {
     }
     
 }
