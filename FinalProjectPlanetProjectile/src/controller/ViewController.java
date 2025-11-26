@@ -1,8 +1,10 @@
+package controller;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
-package controller;
+
 
 import Model.Planet;
 import java.net.URL;
@@ -13,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -75,6 +78,18 @@ public class ViewController implements Initializable {
     private Button nextButtonS3;
     @FXML
     private ComboBox<?> VelecotyComboBox;
+    @FXML
+    private Slider sliderangle;
+    @FXML
+    private AnchorPane pane4;
+    @FXML
+    private ImageView planetGroundSimulation;
+    @FXML
+    private Label timeFlightLabel;
+    @FXML
+    private Label maxHeightLabel;
+    @FXML
+    private ImageView thrownObjectImagiew;
 
     /**
      * Initializes the controller class.
