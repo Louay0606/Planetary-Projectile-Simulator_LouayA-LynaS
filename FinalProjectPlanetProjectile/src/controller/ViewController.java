@@ -22,12 +22,10 @@ public class ViewController {
     @FXML
     private ImageView planetGround;
 
-    // STEP 1: array that will hold all the planets
     private Planet[] planets;
 
     @FXML
     public void initialize() {
-        // STEP 1: only set up the data – UI logic comes later
         planets = new Planet[] {
                 new Planet(1, "Mercury", 3.70, "/View/planet1.png"),
                 new Planet(2, "Venus",   8.87, "/View/planet2.png"),
@@ -40,12 +38,22 @@ public class ViewController {
         };
     }
 
-    // temporary version – we will improve this in the next commit
+    // STEP 2: now this method actually uses the Planet object
     private void openPlanetScreen(int id) {
-        // just switch screens for now
+        Planet p = planets[id - 1];  // id goes 1–8, array index 0–7
+
+        // switch screens
         WelcomeMenuPane.setVisible(false);
         BackgroundSecond.setVisible(true);
+
+        // update UI for the selected planet
+        planetName.setText(p.getName());
+
+        Image groundImage = new Image(
+                getClass().getResourceAsStream(p.getGroundImagePath())
+        );
+        planetGround.setImage(groundImage);
     }
 
-    // click methods come in a later commit
+    // click handlers added next commit
 }
