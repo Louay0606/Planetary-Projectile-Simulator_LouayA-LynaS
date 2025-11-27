@@ -9,6 +9,8 @@ package controller;
 import Model.Planet;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.Animation;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -27,6 +30,19 @@ import javafx.scene.layout.AnchorPane;
  * @author louay
  */
 public class ViewController implements Initializable {
+    
+    private Planet selectedPlanet;
+    private String selectedObjectName;
+    private Image selectedObjectImage;
+    
+    private double selectedVelocity;
+    private double selectedAngle;
+
+    private double timeOfFlight;
+    private double maxHeight;
+    private double range;
+    
+    
      private Planet[] planets;
     @FXML
     private AnchorPane WelcomeMenuPane;
@@ -112,21 +128,52 @@ public class ViewController implements Initializable {
                 new Planet(7, "Uranus",   8.69, "/View/planet7.png"),
                 new Planet(8, "Neptune", 11.15, "/View/planet8.png")
         };
+         
+        floatAnimation(start);
+        floatAnimation(apple);
+        floatAnimation(flower);
+        floatAnimation(soccer);
+        
+        WelcomeMenuPane.setVisible(true);
+        pane3.setVisible(false);
+        pane4.setVisible(false);
+
+
     }    
     
     private void openPlanetScreen(int id) {
-        Planet p = planets[id - 1];
+        
+        selectedPlanet = planets[id - 1];
 
+        
         WelcomeMenuPane.setVisible(false);
         pane3.setVisible(true);
 
-        planetName.setText(p.getName());
+        planetName.setText(selectedPlanet.getName());
 
         Image groundImage = new Image(
-                getClass().getResourceAsStream(p.getGroundImagePath())
+                getClass().getResourceAsStream(selectedPlanet.getGroundImagePath())
         );
         planetGround.setImage(groundImage);
+        planetGroundSimulation.setImage(groundImage); // same ground in simulation
+
+        resetObjectAndControls();
     }
+
+    /**
+     * create an animation for the second scene where we see the object 
+     * slightly moving up and down
+     * @param img ( flower , soccer , star and apple imageviews)
+     */
+    private void floatAnimation(ImageView img) {
+    TranslateTransition t = new TranslateTransition(Duration.seconds(1.5), img);
+    t.setByY(-12);
+    t.setCycleCount(Animation.INDEFINITE);
+    t.setAutoReverse(true);
+    t.play();
+}
+
+    
 
  @FXML
     void mercuryClicked(MouseEvent event) {
@@ -199,6 +246,10 @@ public class ViewController implements Initializable {
 
     @FXML
     private void exitSimuButton(ActionEvent event) {
+    }
+
+    private void resetObjectAndControls() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }
