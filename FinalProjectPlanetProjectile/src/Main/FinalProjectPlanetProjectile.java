@@ -19,12 +19,12 @@ public class FinalProjectPlanetProjectile extends Application{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //testing this bs
+        launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/View.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/planetSimulatorView.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setTitle("Planet Project");
         stage.setScene(scene);

@@ -112,6 +112,10 @@ public class ViewController implements Initializable {
     private Button resartSimuButton;
     @FXML
     private Button exitSimuButton;
+    @FXML
+    private AnchorPane pane5;
+    @FXML
+    private AnchorPane pane2;
 
     /**
      * Initializes the controller class.
@@ -135,10 +139,10 @@ public class ViewController implements Initializable {
         floatAnimation(soccer);
         
         WelcomeMenuPane.setVisible(true);
+        pane2.setVisible(false);
         pane3.setVisible(false);
         pane4.setVisible(false);
-
-
+        pane5.setVisible(false);
     }    
     
     private void openPlanetScreen(int id) {
@@ -147,7 +151,10 @@ public class ViewController implements Initializable {
 
         
         WelcomeMenuPane.setVisible(false);
-        pane3.setVisible(true);
+        pane2.setVisible(true);
+        pane3.setVisible(false);
+        pane4.setVisible(false);
+        pane5.setVisible(false);
 
         planetName.setText(selectedPlanet.getName());
 
@@ -157,7 +164,6 @@ public class ViewController implements Initializable {
         planetGround.setImage(groundImage);
         planetGroundSimulation.setImage(groundImage); // same ground in simulation
 
-        resetObjectAndControls();
     }
 
     /**
@@ -172,6 +178,18 @@ public class ViewController implements Initializable {
     t.setAutoReverse(true);
     t.play();
 }
+    private void objectSelected(ImageView img, String objName) {
+        selectedObjectName = objName;
+        selectedObjectImage = img.getImage();
+
+        pane2.setVisible(false);
+        pane3.setVisible(true);
+        
+        objectChosenImageView.setImage(selectedObjectImage);
+        objectChosenLabel.setText(objName);
+
+        fillVelocityComboBox();
+    }
 
     
 
@@ -218,18 +236,23 @@ public class ViewController implements Initializable {
 
     @FXML
     private void startClicked(MouseEvent event) {
+        objectSelected(start, "Star");
     }
 
     @FXML
     private void flowerClicked(MouseEvent event) {
+         objectSelected(flower, "Flower");
     }
 
     @FXML
     private void soccerClicked(MouseEvent event) {
+        objectSelected(soccer, "Soccer Ball");
     }
 
     @FXML
     private void appleClicked(MouseEvent event) {
+        objectSelected(apple, "Appple");
+        
     }
 
     @FXML
@@ -249,6 +272,10 @@ public class ViewController implements Initializable {
     }
 
     private void resetObjectAndControls() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void fillVelocityComboBox() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
