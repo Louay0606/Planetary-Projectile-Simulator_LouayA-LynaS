@@ -93,7 +93,7 @@ public class ViewController implements Initializable {
     @FXML
     private Button nextButtonS3;
     @FXML
-    private ComboBox<?> VelecotyComboBox;
+    private ComboBox<Double> VelecotyComboBox;
     @FXML
     private Slider sliderangle;
     @FXML
@@ -116,6 +116,8 @@ public class ViewController implements Initializable {
     private AnchorPane pane5;
     @FXML
     private AnchorPane pane2;
+    @FXML
+    private Label angleValueLabel;
 
     /**
      * Initializes the controller class.
@@ -163,7 +165,12 @@ public class ViewController implements Initializable {
         );
         planetGround.setImage(groundImage);
         planetGroundSimulation.setImage(groundImage); // same ground in simulation
+        
+        angleValueLabel.setText("Angle: " + (int) sliderangle.getValue() + "°");
 
+        sliderangle.valueProperty().addListener((obs, oldVal, newVal) -> {
+            angleValueLabel.setText("Angle: " + String.format("%.0f°", newVal.doubleValue()));
+        });
     }
 
     /**
@@ -261,6 +268,7 @@ public class ViewController implements Initializable {
 
     @FXML
     private void nextS3(ActionEvent event) {
+        
     }
 
     @FXML
@@ -272,11 +280,40 @@ public class ViewController implements Initializable {
     }
 
     private void resetObjectAndControls() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        start.setVisible(true);
+        apple.setVisible(true);
+        flower.setVisible(true);
+        soccer.setVisible(true);
+
+        objectChosenImageView.setImage(null);
+        objectChosenLabel.setText("");
+
+        if (VelecotyComboBox != null) {
+            VelecotyComboBox.getItems().clear();
+            VelecotyComboBox.setValue(null);
+        }
+        sliderangle.setValue(45);
+    }
+    private void fillVelocityComboBox() {
+
+        VelecotyComboBox.getItems().clear();
+
+        double g = selectedPlanet.getGravity();
+
+        if (g <= 4) {
+            VelecotyComboBox.getItems().addAll(0.00, 5.0, 10.0, 15.0, 20.0, 25.0);
+        } else if (g <= 11) {
+            VelecotyComboBox.getItems().addAll(0.00,10.0, 20.0, 30.0, 40.0);
+        } else {
+            VelecotyComboBox.getItems().addAll(0.00, 20.0, 30.0, 40.0, 50.0, 60.0);
+        }
+
+        VelecotyComboBox.setValue(VelecotyComboBox.getItems().get(0));
     }
 
-    private void fillVelocityComboBox() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-}
+
+   
+
+
