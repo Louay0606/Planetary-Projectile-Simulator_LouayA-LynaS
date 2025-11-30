@@ -1,5 +1,10 @@
 package controller;
 
+/*
+ *  Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ *  Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
+ */
+
 import Model.Planet;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -74,6 +79,11 @@ public class ViewController implements Initializable {
     @FXML private AnchorPane pane5;
     @FXML private AnchorPane pane2;
     @FXML private Label angleValueLabel;
+
+    // these exist in the FXML, keep them for injection even if we don't use them
+    @FXML private Label timeFlightLabel;
+    @FXML private Label maxHeightLabel;
+    @FXML private Label distanceResultLabel;
 
     /**
      * Initializes the controller.
@@ -305,57 +315,78 @@ public class ViewController implements Initializable {
     }
 
     /**
-     * Starts the projectile animation using a Timeline
-     * and shows the results when it hits the ground or leaves the screen.
+     * Starts the projectile animation using a Timeline,
+     * exactly as in the original version, and shows the
+     * results when it hits the ground or leaves the screen.
      */
     private void startSmoothAnimation() {
+
         pane3.setVisible(false);
         pane4.setVisible(true);
 
+        // Set the thrown object image
         thrownObjectImagiew.setImage(selectedObjectImage);
+
 
         double startX = 24;
         double startY = 150;
         thrownObjectImagiew.setLayoutX(startX);
         thrownObjectImagiew.setLayoutY(startY);
 
+        // Physics
         double v = selectedVelocity;
         double g = selectedPlanet.getGravity();
         double angle = Math.toRadians(selectedAngle);
 
+        // For time tracking
         final double[] t = {0};
+
         double scale = 2;
-        double collisionY = 300;
+
+        // GROUND VALUES
+        double groundTopY = 218;
+        double objectHeight = 39;
+        double collisionY = 300; // ground
 
         final Timeline[] timeline = new Timeline[1];
 
         timeline[0] = new Timeline(new KeyFrame(Duration.millis(16), e -> {
+
             t[0] += 0.016;
 
+            // PHYSICS
             double x = v * Math.cos(angle) * t[0];
             double y = v * Math.sin(angle) * t[0] - 0.5 * g * t[0] * t[0];
 
+            // Convert into screen coordinates
             double screenX = startX + x * scale;
             double screenY = startY - y * scale;
 
             thrownObjectImagiew.setLayoutX(screenX);
             thrownObjectImagiew.setLayoutY(screenY);
 
+            // Add spin
             thrownObjectImagiew.setRotate(thrownObjectImagiew.getRotate() + 5);
 
+            // STOP WHEN IT TOUCHES GROUND
             if (screenY >= collisionY) {
                 timeline[0].stop();
+
                 showResults();
             }
 
+            // STOP IF OUTSIDE SCREEN (failsafe)
             if (screenX > pane4.getWidth() || screenY > pane4.getHeight()) {
                 timeline[0].stop();
+
                 showResults();
             }
+
         }));
 
         timeline[0].setCycleCount(Animation.INDEFINITE);
         timeline[0].play();
+
     }
 
     /**
