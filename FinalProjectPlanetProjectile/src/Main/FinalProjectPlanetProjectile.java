@@ -28,6 +28,7 @@ public class FinalProjectPlanetProjectile extends Application{
         Scene scene = new Scene(loader.load());
         stage.setTitle("Planet Project");
         stage.setScene(scene);
+        
         stage.show();
     }
     

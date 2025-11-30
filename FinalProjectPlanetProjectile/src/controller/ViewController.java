@@ -118,6 +118,7 @@ public class ViewController implements Initializable {
     private AnchorPane pane2;
     @FXML
     private Label angleValueLabel;
+    
 
     /**
      * Initializes the controller class.
@@ -199,18 +200,20 @@ public class ViewController implements Initializable {
     }
     /**
      * Method that gets the values needed for the physics calculation
-     * based myself accordingly to : https://docs.vultr.com/java/standard-library/java/lang/Math/toRadians
+     * based myself acconrdingly to : https://docs.vultr.com/java/standard-library/java/lang/Math/toRadians
      */
+
     private void computeProjectileValues() {
-    double v = selectedVelocity;
-    double g = selectedPlanet.getGravity();
-    double angleRad = Math.toRadians(selectedAngle);
+        double v = selectedVelocity;
+        double g = selectedPlanet.getGravity();
+        double angleRad = Math.toRadians(selectedAngle);
 
-    timeOfFlight = (2 * v * Math.sin(angleRad)) / g;
-    range = (v * v * Math.sin(2 * angleRad)) / g;
-    maxHeight = (v * v * Math.pow(Math.sin(angleRad), 2)) / (2 * g);
-}
+        timeOfFlight = (2 * v * Math.sin(angleRad)) / g;
+        range = (v * v * Math.sin(2 * angleRad)) / g;
+        maxHeight = (v * v * Math.pow(Math.sin(angleRad), 2)) / (2 * g);
+    }
 
+    
     
 
  @FXML
@@ -279,16 +282,18 @@ public class ViewController implements Initializable {
     }
 
     @FXML
-    private void nextS3(ActionEvent event) {
-        if (VelecotyComboBox.getValue() == null || selectedObjectImage == null) {
-            return;
-        }
+    private void nextS3(ActionEvent event) { 
+         if (VelecotyComboBox.getValue() == null || selectedObjectImage == null) {
+        return;
+    }
 
-        selectedVelocity = VelecotyComboBox.getValue();
-        selectedAngle = sliderangle.getValue();
+    selectedVelocity = VelecotyComboBox.getValue();
+    selectedAngle = sliderangle.getValue();
 
-        computeProjectileValues();
+    computeProjectileValues();
+   startSmoothAnimation();
 
+           
     }
     
     @FXML
@@ -330,6 +335,10 @@ public class ViewController implements Initializable {
         }
 
         VelecotyComboBox.setValue(VelecotyComboBox.getItems().get(0));
+    }
+
+    private void startSmoothAnimation() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     }
