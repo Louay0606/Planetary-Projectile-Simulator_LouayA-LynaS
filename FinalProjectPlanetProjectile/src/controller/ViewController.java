@@ -161,7 +161,7 @@ public class ViewController implements Initializable {
                 getClass().getResourceAsStream(selectedPlanet.getGroundImagePath())
         );
         planetGround.setImage(groundImage);
-        planetGroundSimulation.setImage(groundImage); // same ground in simulation
+        planetGroundSimulation.setImage(groundImage);
 
         angleValueLabel.setText("Angle: " + (int) sliderangle.getValue() + "°");
 
@@ -263,7 +263,9 @@ public class ViewController implements Initializable {
 
     @FXML
     private void returnS3(ActionEvent event) {
-        // implemented in commit 2
+        pane3.setVisible(false);
+        pane2.setVisible(true);
+        resetObjectAndControls();
     }
 
     @FXML
@@ -281,12 +283,10 @@ public class ViewController implements Initializable {
 
     @FXML
     private void restartButton(ActionEvent event) {
-        // implemented in commit 3
     }
 
     @FXML
     private void exitSimuButton(ActionEvent event) {
-        // implemented in commit 4
     }
 
     private void resetObjectAndControls() {
@@ -380,7 +380,6 @@ public class ViewController implements Initializable {
         timeline[0].play();
     }
 
-    // COMMIT 1: showResults implementation
     private void showResults() {
         pane4.setVisible(false);
         pane5.setVisible(true);
