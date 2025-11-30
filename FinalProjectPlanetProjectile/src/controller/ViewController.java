@@ -21,23 +21,47 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 /**
- * Controller for the Planetary Projectile Simulator.
- * Handles user interaction, scene navigation, physics computation,
- * and projectile animation.
+ * Controller for the Planetary Projectile Simulator application.
+ *
+ * This class manages all UI interaction, scene switching,
+ * object selection, physics calculations, and the projectile animation.
+ * It acts as the main logic controller that responds to user selections
+ * and updates the FXML interface accordingly.
+ *
+ * The application flow is:
+ * Welcome screen → Planet selection → Object selection →
+ * Angle/velocity selection → Animation → Results screen.
+ *
+ * Physics calculations use standard projectile motion equations
+ * assuming no air resistance.
  */
 public class ViewController implements Initializable {
 
+    /** The planet currently selected by the user. */
     private Planet selectedPlanet;
+    
+    /** Name of the object the user selected to throw. */
     private String selectedObjectName;
+    
+    /** Image of the object selected by the user. */
     private Image selectedObjectImage;
 
+     /** The velocity selected by the user (m/s). */
     private double selectedVelocity;
+    
+    /** The angle selected by the user (degrees). */
     private double selectedAngle;
 
+    /** Total time of flight computed from physics. */
     private double timeOfFlight;
+    
+     /** Maximum height of the projectile. */
     private double maxHeight;
+    
+    /** Horizontal range of the projectile. */
     private double range;
-
+   
+    /** Array of all available planets. */
     private Planet[] planets;
 
     @FXML private AnchorPane WelcomeMenuPane;
@@ -52,6 +76,7 @@ public class ViewController implements Initializable {
     @FXML private ImageView saturnMenu;
     @FXML private ImageView uranusMenu;
     @FXML private ImageView neptuneMenu;
+    
     @FXML private ImageView BackgroudSecond;
     @FXML private Label planetName;
     @FXML private ImageView planetGround;
@@ -59,6 +84,7 @@ public class ViewController implements Initializable {
     @FXML private ImageView flower;
     @FXML private ImageView soccer;
     @FXML private ImageView apple;
+    
     @FXML private AnchorPane pane3;
     @FXML private Label objectChosenLabel;
     @FXML private ImageView objectChosenImageView;
@@ -66,12 +92,14 @@ public class ViewController implements Initializable {
     @FXML private Button nextButtonS3;
     @FXML private ComboBox<Double> VelecotyComboBox;
     @FXML private Slider sliderangle;
+    
     @FXML private AnchorPane pane4;
     @FXML private ImageView planetGroundSimulation;
     @FXML private ImageView thrownObjectImagiew;
     @FXML private Button resartSimuButton;
     @FXML private Button exitSimuButton;
     @FXML private AnchorPane pane5;
+    
     @FXML private AnchorPane pane2;
     @FXML private Label angleValueLabel;
     @FXML
@@ -114,7 +142,8 @@ public class ViewController implements Initializable {
     /**
      * Opens the planet selection screen for a given planet.
      *
-     * @param id index of the selected planet
+     * @param id index of the selected planet (1-8)
+     * in order of appearance in solar system
      */
     private void openPlanetScreen(int id) {
         selectedPlanet = planets[id - 1];
@@ -160,7 +189,7 @@ public class ViewController implements Initializable {
      * the user to the velocity/angle screen.
      *
      * @param img image of selected object
-     * @param objName object name
+     * @param objName object name of the displayed object
      */
     private void objectSelected(ImageView img, String objName) {
         selectedObjectName = objName;
@@ -177,6 +206,7 @@ public class ViewController implements Initializable {
 
     /**
      * Computes projectile motion values
+     * Computes time of flight, range, and maximum height
      * based on physics equations.
      */
     private void computeProjectileValues() {
