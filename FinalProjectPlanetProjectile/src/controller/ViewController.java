@@ -305,12 +305,57 @@ public class ViewController implements Initializable {
     }
 
     /**
-     * Starts projectile animation.
+     * Starts the projectile animation using a Timeline
+     * and shows the results when it hits the ground or leaves the screen.
      */
     private void startSmoothAnimation() {
         pane3.setVisible(false);
         pane4.setVisible(true);
+
         thrownObjectImagiew.setImage(selectedObjectImage);
+
+        double startX = 24;
+        double startY = 150;
+        thrownObjectImagiew.setLayoutX(startX);
+        thrownObjectImagiew.setLayoutY(startY);
+
+        double v = selectedVelocity;
+        double g = selectedPlanet.getGravity();
+        double angle = Math.toRadians(selectedAngle);
+
+        final double[] t = {0};
+        double scale = 2;
+        double collisionY = 300;
+
+        final Timeline[] timeline = new Timeline[1];
+
+        timeline[0] = new Timeline(new KeyFrame(Duration.millis(16), e -> {
+            t[0] += 0.016;
+
+            double x = v * Math.cos(angle) * t[0];
+            double y = v * Math.sin(angle) * t[0] - 0.5 * g * t[0] * t[0];
+
+            double screenX = startX + x * scale;
+            double screenY = startY - y * scale;
+
+            thrownObjectImagiew.setLayoutX(screenX);
+            thrownObjectImagiew.setLayoutY(screenY);
+
+            thrownObjectImagiew.setRotate(thrownObjectImagiew.getRotate() + 5);
+
+            if (screenY >= collisionY) {
+                timeline[0].stop();
+                showResults();
+            }
+
+            if (screenX > pane4.getWidth() || screenY > pane4.getHeight()) {
+                timeline[0].stop();
+                showResults();
+            }
+        }));
+
+        timeline[0].setCycleCount(Animation.INDEFINITE);
+        timeline[0].play();
     }
 
     /**
