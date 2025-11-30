@@ -5,6 +5,7 @@ package controller;
  *  Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 
+
 import Model.Planet;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,11 +25,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import javafx.application.Platform;
 
 /**
- * Controller for the Planetary Projectile Simulator.
- * Handles user interaction, scene navigation, physics computation,
- * and projectile animation.
+ * FXML Controller class
+ *
+ * @author louay
  */
 public class ViewController implements Initializable {
 
@@ -43,63 +45,97 @@ public class ViewController implements Initializable {
     private double maxHeight;
     private double range;
 
+
     private Planet[] planets;
+    @FXML
+    private AnchorPane WelcomeMenuPane;
+    @FXML
+    private ImageView BackgroundMenu;
+    @FXML
+    private Label welcomeLabel;
+    @FXML
+    private Label clickLabel;
+    @FXML
+    private ImageView venusMenu;
+    @FXML
+    private ImageView mercuryMenu;
+    @FXML
+    private ImageView earthMenu;
+    @FXML
+    private ImageView marsMenu;
+    @FXML
+    private ImageView jupiterMenu;
+    @FXML
+    private ImageView saturnMenu;
+    @FXML
+    private ImageView uranusMenu;
+    @FXML
+    private ImageView neptuneMenu;
+    @FXML
+    private ImageView BackgroudSecond;
+    @FXML
+    private Label planetName;
+    @FXML
+    private ImageView planetGround;
+    @FXML
+    private ImageView start;
+    @FXML
+    private ImageView flower;
+    @FXML
+    private ImageView soccer;
+    @FXML
+    private ImageView apple;
+    @FXML
+    private AnchorPane pane3;
+    @FXML
+    private Label objectChosenLabel;
+    @FXML
+    private ImageView objectChosenImageView;
+    @FXML
+    private Button returnButtonS3;
+    @FXML
+    private Button nextButtonS3;
+    @FXML
+    private ComboBox<Double> VelecotyComboBox;
+    @FXML
+    private Slider sliderangle;
+    @FXML
+    private AnchorPane pane4;
+    @FXML
+    private ImageView planetGroundSimulation;
+    @FXML
+    private Label timeFlightLabel;
+    @FXML
+    private Label maxHeightLabel;
+    @FXML
+    private ImageView thrownObjectImagiew;
+    @FXML
+    private Label distanceResultLabel;
+    @FXML
+    private Button resartSimuButton;
+    @FXML
+    private Button exitSimuButton;
+    @FXML
+    private AnchorPane pane5;
+    @FXML
+    private AnchorPane pane2;
+    @FXML
+    private Label angleValueLabel;
 
-    @FXML private AnchorPane WelcomeMenuPane;
-    @FXML private ImageView BackgroundMenu;
-    @FXML private Label welcomeLabel;
-    @FXML private Label clickLabel;
-    @FXML private ImageView venusMenu;
-    @FXML private ImageView mercuryMenu;
-    @FXML private ImageView earthMenu;
-    @FXML private ImageView marsMenu;
-    @FXML private ImageView jupiterMenu;
-    @FXML private ImageView saturnMenu;
-    @FXML private ImageView uranusMenu;
-    @FXML private ImageView neptuneMenu;
-    @FXML private ImageView BackgroudSecond;
-    @FXML private Label planetName;
-    @FXML private ImageView planetGround;
-    @FXML private ImageView start;
-    @FXML private ImageView flower;
-    @FXML private ImageView soccer;
-    @FXML private ImageView apple;
-    @FXML private AnchorPane pane3;
-    @FXML private Label objectChosenLabel;
-    @FXML private ImageView objectChosenImageView;
-    @FXML private Button returnButtonS3;
-    @FXML private Button nextButtonS3;
-    @FXML private ComboBox<Double> VelecotyComboBox;
-    @FXML private Slider sliderangle;
-    @FXML private AnchorPane pane4;
-    @FXML private ImageView planetGroundSimulation;
-    @FXML private ImageView thrownObjectImagiew;
-    @FXML private Button resartSimuButton;
-    @FXML private Button exitSimuButton;
-    @FXML private AnchorPane pane5;
-    @FXML private AnchorPane pane2;
-    @FXML private Label angleValueLabel;
-
-    // these exist in the FXML, keep them for injection even if we don't use them
-    @FXML private Label timeFlightLabel;
-    @FXML private Label maxHeightLabel;
-    @FXML private Label distanceResultLabel;
 
     /**
-     * Initializes the controller.
-     * Creates planet data, starts idle animations,
-     * and sets initial screen visibility.
+     * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        planets = new Planet[]{
+        planets = new Planet[] {
                 new Planet(1, "Mercury", 3.70, "/View/planet1.png"),
-                new Planet(2, "Venus", 8.87, "/View/planet2.png"),
-                new Planet(3, "Earth", 9.81, "/View/planet3.png"),
-                new Planet(4, "Mars", 3.71, "/View/planet4.png"),
+                new Planet(2, "Venus",   8.87, "/View/planet2.png"),
+                new Planet(3, "Earth",   9.81, "/View/planet3.png"),
+                new Planet(4, "Mars",    3.71, "/View/planet4.png"),
                 new Planet(5, "Jupiter", 24.79, "/View/planet5.png"),
-                new Planet(6, "Saturn", 10.44, "/View/planet6.png"),
-                new Planet(7, "Uranus", 8.69, "/View/planet7.png"),
+                new Planet(6, "Saturn",  10.44, "/View/planet6.png"),
+                new Planet(7, "Uranus",   8.69, "/View/planet7.png"),
                 new Planet(8, "Neptune", 11.15, "/View/planet8.png")
         };
 
@@ -115,13 +151,10 @@ public class ViewController implements Initializable {
         pane5.setVisible(false);
     }
 
-    /**
-     * Opens the planet selection screen for a given planet.
-     *
-     * @param id index of the selected planet
-     */
     private void openPlanetScreen(int id) {
+
         selectedPlanet = planets[id - 1];
+
 
         WelcomeMenuPane.setVisible(false);
         pane2.setVisible(true);
@@ -131,41 +164,31 @@ public class ViewController implements Initializable {
 
         planetName.setText(selectedPlanet.getName());
 
-        Image groundImage =
-                new Image(getClass().getResourceAsStream(
-                        selectedPlanet.getGroundImagePath()));
+        Image groundImage = new Image(
+                getClass().getResourceAsStream(selectedPlanet.getGroundImagePath())
+        );
         planetGround.setImage(groundImage);
-        planetGroundSimulation.setImage(groundImage);
+        planetGroundSimulation.setImage(groundImage); // same ground in simulation
 
-        angleValueLabel.setText(
-                "Angle: " + (int) sliderangle.getValue() + "°");
+        angleValueLabel.setText("Angle: " + (int) sliderangle.getValue() + "°");
 
-        sliderangle.valueProperty().addListener((obs, o, n) ->
-                angleValueLabel.setText(
-                        "Angle: " + String.format("%.0f°", n.doubleValue())));
+        sliderangle.valueProperty().addListener((obs, oldVal, newVal) -> {
+            angleValueLabel.setText("Angle: " + String.format("%.0f°", newVal.doubleValue()));
+        });
     }
 
     /**
-     * Applies a floating animation to menu objects.
-     *
-     * @param img image to animate
+     * create an animation for the second scene where we see the object
+     * slightly moving up and down
+     * @param img ( flower , soccer , star and apple imageviews)
      */
     private void floatAnimation(ImageView img) {
-        TranslateTransition t =
-                new TranslateTransition(Duration.seconds(1.5), img);
+        TranslateTransition t = new TranslateTransition(Duration.seconds(1.5), img);
         t.setByY(-12);
         t.setCycleCount(Animation.INDEFINITE);
         t.setAutoReverse(true);
         t.play();
     }
-
-    /**
-     * Handles object selection and moves
-     * the user to the velocity/angle screen.
-     *
-     * @param img image of selected object
-     * @param objName object name
-     */
     private void objectSelected(ImageView img, String objName) {
         selectedObjectName = objName;
         selectedObjectImage = img.getImage();
@@ -178,11 +201,11 @@ public class ViewController implements Initializable {
 
         fillVelocityComboBox();
     }
-
     /**
-     * Computes projectile motion values
-     * based on physics equations.
+     * Method that gets the values needed for the physics calculation
+     * based myself acconrdingly to : https://docs.vultr.com/java/standard-library/java/lang/Math/toRadians
      */
+
     private void computeProjectileValues() {
         double v = selectedVelocity;
         double g = selectedPlanet.getGravity();
@@ -193,47 +216,70 @@ public class ViewController implements Initializable {
         maxHeight = (v * v * Math.pow(Math.sin(angleRad), 2)) / (2 * g);
     }
 
-    @FXML void mercuryClicked(MouseEvent e) { openPlanetScreen(1); }
-    @FXML void venusClicked(MouseEvent e) { openPlanetScreen(2); }
-    @FXML void earthClicked(MouseEvent e) { openPlanetScreen(3); }
-    @FXML void marsClicked(MouseEvent e) { openPlanetScreen(4); }
-    @FXML void jupiterClicked(MouseEvent e) { openPlanetScreen(5); }
-    @FXML void saturnClicked(MouseEvent e) { openPlanetScreen(6); }
-    @FXML void uranusClicked(MouseEvent e) { openPlanetScreen(7); }
-    @FXML void neptuneClicked(MouseEvent e) { openPlanetScreen(8); }
 
-    /**
-     * Selects the star object.
-     */
-    @FXML private void startClicked(MouseEvent e) {
+
+
+    @FXML
+    void mercuryClicked(MouseEvent event) {
+        openPlanetScreen(1);
+    }
+
+    @FXML
+    void venusClicked(MouseEvent event) {
+        openPlanetScreen(2);
+    }
+
+    @FXML
+    void earthClicked(MouseEvent event) {
+        openPlanetScreen(3);
+    }
+
+    @FXML
+    void marsClicked(MouseEvent event) {
+        openPlanetScreen(4);
+    }
+
+    @FXML
+    void jupiterClicked(MouseEvent event) {
+        openPlanetScreen(5);
+    }
+
+    @FXML
+    void saturnClicked(MouseEvent event) {
+        openPlanetScreen(6);
+    }
+
+    @FXML
+    void uranusClicked(MouseEvent event) {
+        openPlanetScreen(7);
+    }
+
+    @FXML
+    void neptuneClicked(MouseEvent event) {
+        openPlanetScreen(8);
+    }
+
+
+    @FXML
+    private void startClicked(MouseEvent event) {
         objectSelected(start, "Star");
     }
 
-    /**
-     * Selects the flower object.
-     */
-    @FXML private void flowerClicked(MouseEvent e) {
+    @FXML
+    private void flowerClicked(MouseEvent event) {
         objectSelected(flower, "Flower");
     }
 
-    /**
-     * Selects the soccer ball object.
-     */
-    @FXML private void soccerClicked(MouseEvent e) {
+    @FXML
+    private void soccerClicked(MouseEvent event) {
         objectSelected(soccer, "Soccer Ball");
     }
 
-    /**
-     * Selects the apple object.
-     */
-    @FXML private void appleClicked(MouseEvent e) {
+    @FXML
+    private void appleClicked(MouseEvent event) {
         objectSelected(apple, "Appple");
     }
 
-    /**
-     * Returns from the configuration screen
-     * back to object selection.
-     */
     @FXML
     private void returnS3(ActionEvent event) {
         pane3.setVisible(false);
@@ -241,24 +287,21 @@ public class ViewController implements Initializable {
         resetObjectAndControls();
     }
 
-    /**
-     * Starts the projectile simulation.
-     */
     @FXML
     private void nextS3(ActionEvent event) {
-        if (VelecotyComboBox.getValue() == null ||
-                selectedObjectImage == null) return;
+        if (VelecotyComboBox.getValue() == null || selectedObjectImage == null) {
+            return;
+        }
 
         selectedVelocity = VelecotyComboBox.getValue();
         selectedAngle = sliderangle.getValue();
 
         computeProjectileValues();
         startSmoothAnimation();
+
+
     }
 
-    /**
-     * Restarts the simulation without exiting.
-     */
     @FXML
     private void restartButton(ActionEvent event) {
         pane5.setVisible(false);
@@ -269,19 +312,13 @@ public class ViewController implements Initializable {
         thrownObjectImagiew.setRotate(0);
     }
 
-    /**
-     * Exits the application.
-     */
     @FXML
     private void exitSimuButton(ActionEvent event) {
-        javafx.application.Platform.exit();
+        Platform.exit();
     }
 
-    /**
-     * Resets selected objects and controls
-     * to their default state.
-     */
     private void resetObjectAndControls() {
+
         start.setVisible(true);
         apple.setVisible(true);
         flower.setVisible(true);
@@ -290,35 +327,31 @@ public class ViewController implements Initializable {
         objectChosenImageView.setImage(null);
         objectChosenLabel.setText("");
 
-        VelecotyComboBox.getItems().clear();
-        VelecotyComboBox.setValue(null);
-
+        if (VelecotyComboBox != null) {
+            VelecotyComboBox.getItems().clear();
+            VelecotyComboBox.setValue(null);
+        }
         sliderangle.setValue(45);
     }
-
-    /**
-     * Fills the velocity combo box based on
-     * the selected planet gravity.
-     */
     private void fillVelocityComboBox() {
+
         VelecotyComboBox.getItems().clear();
+
         double g = selectedPlanet.getGravity();
 
-        if (g <= 4)
-            VelecotyComboBox.getItems().addAll(0.0,5.0,10.0,15.0,20.0,25.0);
-        else if (g <= 11)
-            VelecotyComboBox.getItems().addAll(0.0,10.0,20.0,30.0,40.0);
-        else
-            VelecotyComboBox.getItems().addAll(0.0,20.0,30.0,40.0,50.0,60.0);
+        if (g <= 4) {
+            VelecotyComboBox.getItems().addAll(0.00, 5.0, 10.0, 15.0, 20.0, 25.0);
+        } else if (g <= 11) {
+            VelecotyComboBox.getItems().addAll(0.00,10.0, 20.0, 30.0, 40.0);
+        } else {
+            VelecotyComboBox.getItems().addAll(0.00, 20.0, 30.0, 40.0, 50.0, 60.0);
+        }
 
         VelecotyComboBox.setValue(VelecotyComboBox.getItems().get(0));
     }
 
-    /**
-     * Starts the projectile animation using a Timeline,
-     * exactly as in the original version, and shows the
-     * results when it hits the ground or leaves the screen.
-     */
+
+
     private void startSmoothAnimation() {
 
         pane3.setVisible(false);
@@ -389,11 +422,14 @@ public class ViewController implements Initializable {
 
     }
 
-    /**
-     * Displays the results screen.
-     */
     private void showResults() {
         pane4.setVisible(false);
         pane5.setVisible(true);
+
+        timeFlightLabel.setText(String.format("%.2f s", timeOfFlight));
+        maxHeightLabel.setText(String.format("%.2f m", maxHeight));
+        distanceResultLabel.setText(String.format("%.2f m", range));
     }
+
+
 }
