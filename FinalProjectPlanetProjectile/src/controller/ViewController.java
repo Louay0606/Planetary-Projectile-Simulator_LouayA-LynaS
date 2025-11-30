@@ -193,6 +193,7 @@ public class ViewController implements Initializable {
 
     @FXML
     private void exitSimuButton(ActionEvent event) {
+        javafx.application.Platform.exit();
     }
 
     private void resetObjectAndControls() {
