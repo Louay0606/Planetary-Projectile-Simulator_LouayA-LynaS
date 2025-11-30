@@ -10,6 +10,8 @@ import Model.Planet;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -337,9 +339,82 @@ public class ViewController implements Initializable {
         VelecotyComboBox.setValue(VelecotyComboBox.getItems().get(0));
     }
 
+    
+
     private void startSmoothAnimation() {
+       
+    pane3.setVisible(false);
+    pane4.setVisible(true);
+
+    // Set the thrown object image
+    thrownObjectImagiew.setImage(selectedObjectImage);
+
+    
+    double startX = 24;
+    double startY = 150;
+    thrownObjectImagiew.setLayoutX(startX);
+    thrownObjectImagiew.setLayoutY(startY);
+
+    // Physics 
+    double v = selectedVelocity;
+    double g = selectedPlanet.getGravity();
+    double angle = Math.toRadians(selectedAngle);
+
+    // For time tracking
+    final double[] t = {0};
+
+    double scale = 2; 
+
+    // GROUND VALUES
+    double groundTopY = 218;    
+    double objectHeight = 39;    
+    double collisionY = 300; // ground
+
+   final Timeline[] timeline = new Timeline[1];
+
+timeline[0] = new Timeline(new KeyFrame(Duration.millis(16), e -> {
+
+        t[0] += 0.016; 
+
+        // PHYSICS
+        double x = v * Math.cos(angle) * t[0];
+        double y = v * Math.sin(angle) * t[0] - 0.5 * g * t[0] * t[0];
+
+        // Convert into screen coordinates
+        double screenX = startX + x * scale;
+        double screenY = startY - y * scale;
+
+        thrownObjectImagiew.setLayoutX(screenX);
+        thrownObjectImagiew.setLayoutY(screenY);
+
+        // Add spin
+        thrownObjectImagiew.setRotate(thrownObjectImagiew.getRotate() + 5);
+
+        // STOP WHEN IT TOUCHES GROUND
+        if (screenY >= collisionY) {
+            timeline[0].stop();
+
+            showResults();
+        }
+
+        // STOP IF OUTSIDE SCREEN (failsafe)
+        if (screenX > pane4.getWidth() || screenY > pane4.getHeight()) {
+            timeline[0].stop();
+
+            showResults();
+        }
+
+    }));
+
+   timeline[0].setCycleCount(Animation.INDEFINITE);
+timeline[0].play();
+
+    }
+
+    private void showResults() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
 
     }
 
