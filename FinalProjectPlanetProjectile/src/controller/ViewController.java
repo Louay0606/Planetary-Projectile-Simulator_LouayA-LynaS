@@ -74,6 +74,12 @@ public class ViewController implements Initializable {
     @FXML private AnchorPane pane5;
     @FXML private AnchorPane pane2;
     @FXML private Label angleValueLabel;
+    @FXML
+    private Label timeFlightLabel;
+    @FXML
+    private Label maxHeightLabel;
+    @FXML
+    private Label distanceResultLabel;
 
     /**
      * Initializes the controller.
@@ -236,8 +242,10 @@ public class ViewController implements Initializable {
      */
     @FXML
     private void nextS3(ActionEvent event) {
-        if (VelecotyComboBox.getValue() == null ||
-                selectedObjectImage == null) return;
+        if (VelecotyComboBox.getValue() == null
+                || selectedObjectImage == null) {
+            return;
+        }
 
         selectedVelocity = VelecotyComboBox.getValue();
         selectedAngle = sliderangle.getValue();
@@ -251,13 +259,41 @@ public class ViewController implements Initializable {
      */
     @FXML
     private void restartButton(ActionEvent event) {
+
+        // Hide all screens
+        pane2.setVisible(false);
+        pane3.setVisible(false);
+        pane4.setVisible(false);
         pane5.setVisible(false);
-        pane4.setVisible(true);
-        resetObjectAndControls();
+
+        // Show the welcome menu again
+        WelcomeMenuPane.setVisible(true);
+
+        // Reset all user selections
+        selectedPlanet = null;
+        selectedObjectName = null;
+        selectedObjectImage = null;
+
+        // Reset UI controls
+        objectChosenLabel.setText("");
+        objectChosenImageView.setImage(null);
+        VelecotyComboBox.getItems().clear();
+        sliderangle.setValue(45);
+        angleValueLabel.setText("Angle: 45°");
+
+        // Reset thrown object
+        thrownObjectImagiew.setImage(null);
         thrownObjectImagiew.setLayoutX(14);
         thrownObjectImagiew.setLayoutY(244);
         thrownObjectImagiew.setRotate(0);
+
+        // Reset results
+        timeFlightLabel.setText("");
+        maxHeightLabel.setText("");
+        distanceResultLabel.setText("");
+
     }
+
 
     /**
      * Exits the application.
@@ -318,7 +354,8 @@ public class ViewController implements Initializable {
 
     
     double startX = 24;
-    double startY = 150;
+    double startY = 100
+            ;
     thrownObjectImagiew.setLayoutX(startX);
     thrownObjectImagiew.setLayoutY(startY);
 
@@ -380,9 +417,23 @@ timeline[0].play();
 
 
     /**
-     * Displays the results screen.
+     * Shows the results after the simulation ends. Fills in the values
+     * calculated earlier (time, height, distance) and switches to the results
+     * pane.
      */
     private void showResults() {
+
+        // Format numbers to 2 decimals
+        String timeFormatted = String.format("%.2f s", timeOfFlight);
+        String heightFormatted = String.format("%.2f m", maxHeight);
+        String rangeFormatted = String.format("%.2f m", range);
+
+        // Fill in the labels in Pane 5
+        timeFlightLabel.setText(timeFormatted);
+        maxHeightLabel.setText(heightFormatted);
+        distanceResultLabel.setText(rangeFormatted);
+
+        // Switch panes
         pane4.setVisible(false);
         pane5.setVisible(true);
 
