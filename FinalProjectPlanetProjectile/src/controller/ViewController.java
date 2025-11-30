@@ -20,6 +20,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
+/**
+ * Controller for the Planetary Projectile Simulator.
+ * Handles user interaction, scene navigation, physics computation,
+ * and projectile animation.
+ */
 public class ViewController implements Initializable {
 
     private Planet selectedPlanet;
@@ -70,6 +75,11 @@ public class ViewController implements Initializable {
     @FXML private AnchorPane pane2;
     @FXML private Label angleValueLabel;
 
+    /**
+     * Initializes the controller.
+     * Creates planet data, starts idle animations,
+     * and sets initial screen visibility.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         planets = new Planet[]{
@@ -95,6 +105,11 @@ public class ViewController implements Initializable {
         pane5.setVisible(false);
     }
 
+    /**
+     * Opens the planet selection screen for a given planet.
+     *
+     * @param id index of the selected planet
+     */
     private void openPlanetScreen(int id) {
         selectedPlanet = planets[id - 1];
 
@@ -106,24 +121,41 @@ public class ViewController implements Initializable {
 
         planetName.setText(selectedPlanet.getName());
 
-        Image groundImage = new Image(getClass().getResourceAsStream(selectedPlanet.getGroundImagePath()));
+        Image groundImage =
+                new Image(getClass().getResourceAsStream(
+                        selectedPlanet.getGroundImagePath()));
         planetGround.setImage(groundImage);
         planetGroundSimulation.setImage(groundImage);
 
-        angleValueLabel.setText("Angle: " + (int) sliderangle.getValue() + "°");
+        angleValueLabel.setText(
+                "Angle: " + (int) sliderangle.getValue() + "°");
 
         sliderangle.valueProperty().addListener((obs, o, n) ->
-                angleValueLabel.setText("Angle: " + String.format("%.0f°", n.doubleValue())));
+                angleValueLabel.setText(
+                        "Angle: " + String.format("%.0f°", n.doubleValue())));
     }
 
+    /**
+     * Applies a floating animation to menu objects.
+     *
+     * @param img image to animate
+     */
     private void floatAnimation(ImageView img) {
-        TranslateTransition t = new TranslateTransition(Duration.seconds(1.5), img);
+        TranslateTransition t =
+                new TranslateTransition(Duration.seconds(1.5), img);
         t.setByY(-12);
         t.setCycleCount(Animation.INDEFINITE);
         t.setAutoReverse(true);
         t.play();
     }
 
+    /**
+     * Handles object selection and moves
+     * the user to the velocity/angle screen.
+     *
+     * @param img image of selected object
+     * @param objName object name
+     */
     private void objectSelected(ImageView img, String objName) {
         selectedObjectName = objName;
         selectedObjectImage = img.getImage();
@@ -137,6 +169,10 @@ public class ViewController implements Initializable {
         fillVelocityComboBox();
     }
 
+    /**
+     * Computes projectile motion values
+     * based on physics equations.
+     */
     private void computeProjectileValues() {
         double v = selectedVelocity;
         double g = selectedPlanet.getGravity();
@@ -156,11 +192,38 @@ public class ViewController implements Initializable {
     @FXML void uranusClicked(MouseEvent e) { openPlanetScreen(7); }
     @FXML void neptuneClicked(MouseEvent e) { openPlanetScreen(8); }
 
-    @FXML private void startClicked(MouseEvent e) { objectSelected(start, "Star"); }
-    @FXML private void flowerClicked(MouseEvent e) { objectSelected(flower, "Flower"); }
-    @FXML private void soccerClicked(MouseEvent e) { objectSelected(soccer, "Soccer Ball"); }
-    @FXML private void appleClicked(MouseEvent e) { objectSelected(apple, "Appple"); }
+    /**
+     * Selects the star object.
+     */
+    @FXML private void startClicked(MouseEvent e) {
+        objectSelected(start, "Star");
+    }
 
+    /**
+     * Selects the flower object.
+     */
+    @FXML private void flowerClicked(MouseEvent e) {
+        objectSelected(flower, "Flower");
+    }
+
+    /**
+     * Selects the soccer ball object.
+     */
+    @FXML private void soccerClicked(MouseEvent e) {
+        objectSelected(soccer, "Soccer Ball");
+    }
+
+    /**
+     * Selects the apple object.
+     */
+    @FXML private void appleClicked(MouseEvent e) {
+        objectSelected(apple, "Appple");
+    }
+
+    /**
+     * Returns from the configuration screen
+     * back to object selection.
+     */
     @FXML
     private void returnS3(ActionEvent event) {
         pane3.setVisible(false);
@@ -168,9 +231,13 @@ public class ViewController implements Initializable {
         resetObjectAndControls();
     }
 
+    /**
+     * Starts the projectile simulation.
+     */
     @FXML
     private void nextS3(ActionEvent event) {
-        if (VelecotyComboBox.getValue() == null || selectedObjectImage == null) return;
+        if (VelecotyComboBox.getValue() == null ||
+                selectedObjectImage == null) return;
 
         selectedVelocity = VelecotyComboBox.getValue();
         selectedAngle = sliderangle.getValue();
@@ -179,23 +246,31 @@ public class ViewController implements Initializable {
         startSmoothAnimation();
     }
 
+    /**
+     * Restarts the simulation without exiting.
+     */
     @FXML
     private void restartButton(ActionEvent event) {
         pane5.setVisible(false);
         pane4.setVisible(true);
-
         resetObjectAndControls();
-
         thrownObjectImagiew.setLayoutX(14);
         thrownObjectImagiew.setLayoutY(244);
         thrownObjectImagiew.setRotate(0);
     }
 
+    /**
+     * Exits the application.
+     */
     @FXML
     private void exitSimuButton(ActionEvent event) {
         javafx.application.Platform.exit();
     }
 
+    /**
+     * Resets selected objects and controls
+     * to their default state.
+     */
     private void resetObjectAndControls() {
         start.setVisible(true);
         apple.setVisible(true);
@@ -211,23 +286,36 @@ public class ViewController implements Initializable {
         sliderangle.setValue(45);
     }
 
+    /**
+     * Fills the velocity combo box based on
+     * the selected planet gravity.
+     */
     private void fillVelocityComboBox() {
         VelecotyComboBox.getItems().clear();
         double g = selectedPlanet.getGravity();
 
-        if (g <= 4) VelecotyComboBox.getItems().addAll(0.0,5.0,10.0,15.0,20.0,25.0);
-        else if (g <= 11) VelecotyComboBox.getItems().addAll(0.0,10.0,20.0,30.0,40.0);
-        else VelecotyComboBox.getItems().addAll(0.0,20.0,30.0,40.0,50.0,60.0);
+        if (g <= 4)
+            VelecotyComboBox.getItems().addAll(0.0,5.0,10.0,15.0,20.0,25.0);
+        else if (g <= 11)
+            VelecotyComboBox.getItems().addAll(0.0,10.0,20.0,30.0,40.0);
+        else
+            VelecotyComboBox.getItems().addAll(0.0,20.0,30.0,40.0,50.0,60.0);
 
         VelecotyComboBox.setValue(VelecotyComboBox.getItems().get(0));
     }
 
+    /**
+     * Starts projectile animation.
+     */
     private void startSmoothAnimation() {
         pane3.setVisible(false);
         pane4.setVisible(true);
         thrownObjectImagiew.setImage(selectedObjectImage);
     }
 
+    /**
+     * Displays the results screen.
+     */
     private void showResults() {
         pane4.setVisible(false);
         pane5.setVisible(true);
