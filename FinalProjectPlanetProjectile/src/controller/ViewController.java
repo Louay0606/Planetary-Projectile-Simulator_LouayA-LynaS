@@ -1,9 +1,9 @@
 package controller;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
+     /*                                                                                                
+ *  Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license   
+ *  Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template   
+     */                                                                                             
 
 
 import Model.Planet;
@@ -197,6 +197,19 @@ public class ViewController implements Initializable {
 
         fillVelocityComboBox();
     }
+    /**
+     * Method that gets the values needed for the physics calculation
+     * based myself accordingly to : https://docs.vultr.com/java/standard-library/java/lang/Math/toRadians
+     */
+    private void computeProjectileValues() {
+    double v = selectedVelocity;
+    double g = selectedPlanet.getGravity();
+    double angleRad = Math.toRadians(selectedAngle);
+
+    timeOfFlight = (2 * v * Math.sin(angleRad)) / g;
+    range = (v * v * Math.sin(2 * angleRad)) / g;
+    maxHeight = (v * v * Math.pow(Math.sin(angleRad), 2)) / (2 * g);
+}
 
     
 
@@ -258,8 +271,7 @@ public class ViewController implements Initializable {
 
     @FXML
     private void appleClicked(MouseEvent event) {
-        objectSelected(apple, "Appple");
-        
+        objectSelected(apple, "Appple");  
     }
 
     @FXML
@@ -268,9 +280,17 @@ public class ViewController implements Initializable {
 
     @FXML
     private void nextS3(ActionEvent event) {
-        
-    }
+        if (VelecotyComboBox.getValue() == null || selectedObjectImage == null) {
+            return;
+        }
 
+        selectedVelocity = VelecotyComboBox.getValue();
+        selectedAngle = sliderangle.getValue();
+
+        computeProjectileValues();
+
+    }
+    
     @FXML
     private void restartButton(ActionEvent event) {
     }
